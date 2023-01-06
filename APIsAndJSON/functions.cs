@@ -1,10 +1,15 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace APIsAndJSON
 {
-    public class Program
+    public class functions
     {
-        static void Main(string[] args)
+        public static void KanyeQuote()
         {
             var client = new HttpClient();
 
@@ -14,22 +19,21 @@ namespace APIsAndJSON
 
             var kanyeQuote = JObject.Parse(kanyeResponse).GetValue("quote").ToString();
 
+            Console.WriteLine("Kanye : {0}", kanyeQuote);
+        }
+
+        public static void RonQuote()
+        {
+            var client = new HttpClient();
+
             var ronURL = "https://ron-swanson-quotes.herokuapp.com/v2/quotes";
 
             var ronResponse = client.GetStringAsync(ronURL).Result;
 
             var ronQuote = JArray.Parse(ronResponse).ToString().Replace('[', ' ').Replace(']', ' ').Trim();
 
-           // Console.WriteLine(kanyeQuote);
-
-           // Console.WriteLine(ronQuote);    
-
-            for (int i = 0; i < 5; i++)
-            {
-                functions.KanyeQuote();
-                functions.RonQuote();
-                Console.WriteLine();
-            }
+            Console.WriteLine("Ron : {0}", ronQuote);
+            
         }
     }
 }

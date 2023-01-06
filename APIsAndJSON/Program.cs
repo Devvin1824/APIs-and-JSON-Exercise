@@ -30,6 +30,16 @@ namespace APIsAndJSON
                 functions.RonQuote();
                 Console.WriteLine();
             }
+
+            var key = "37ece36c446e06a7fc88ee9cc29d11f2";
+            var city = "Seattle";
+            var weatherURL = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}"; // endpoint
+            var weatherResponse = client.GetStringAsync(weatherURL).Result; // response 
+            var newWeather = JObject.Parse(weatherResponse);
+            
+            
+            Console.WriteLine(newWeather);
+
         }
     }
 }
